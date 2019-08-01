@@ -1,4 +1,4 @@
-const linkedList = require('./linked-list')
+const linkedList = require('./linked-list');
 
 // #0 Bubble Sort ---------------------------------------------------
 // SLOWEST sorting algorithm
@@ -9,7 +9,7 @@ function bubbleSort(array) {
   let numOfSwaps = 0;
   for (let i = 0; i < array.length - 1; i++) {
     if (array[i] > array[i + 1]) {
-      _swap(array, i, i + 1);
+      swap(array, i, i + 1);
       numOfSwaps++;
     }
   }
@@ -24,8 +24,6 @@ function bubbleSort(array) {
 // mergeSort (input data) into leftArr + rightArr
 // Recursively sort leftArr and rightArr
 // OUTPUT (merge(leftArr, rightArr) into the OUTPUT array) 
-
-
 
 function mergeSort(array) {
   if (array.length <= 1) {
@@ -58,7 +56,7 @@ function merge(left, right, array) {
   for (let i = rightIndex; i < right.length; i++) {
     array[outputIndex++] = right[i];
   }
-  // console.log('returing this array from merge: ');
+  // console.log('returning this array from merge: ');
   // console.log(array);
   return array;
 }
@@ -80,7 +78,7 @@ function quickSort(array, start = 0, end = array.length) {
   array = quickSort(array, start, middle);
   array = quickSort(array, middle + 1, end);
   return array;
-};
+}
 function partition(array, start, end) {
   const pivot = array[end - 1];
   let j = start;
@@ -94,7 +92,7 @@ function partition(array, start, end) {
   }
   swap(array, end - 1, j);
   return j;
-};
+}
 
 // SWAP HELPER function ---------------------------------------------
 // used in BUBBLE SORT + QUICK SORT
@@ -105,25 +103,39 @@ function swap(array, i, j) {
 }
 
 function display(list) {
-  let currNode = list.head
+  let currNode = list.head;
   if (!list.head) {
-    return null
+    return null;
   }
-
   while (currNode !== null) {
-    console.log(currNode.value)
-    currNode = currNode.next
+    console.log(currNode.value);
+    currNode = currNode.next;
+  }
+}
+
+function size(list) {
+  let counter = 1;
+  if (list.head === null) {
+    return null;
+  }
+  else {
+    let tempNode = list.head;
+    while (tempNode.next !== null) {
+      counter ++;
+      tempNode = tempNode.next;
+    }
+    return counter;
   }
 }
 
 function main() {
 
-  const input1 = [3, 9, 1, 14, 17, 24, 22, 20]
+  const input1 = [3, 9, 1, 14, 17, 24, 22, 20];
   const input2 = [21, 1, 26, 45, 29, 28, 2, 9, 16, 49, 39, 27, 43, 34, 46, 40];
-  const input3 = '89 30 25 32 72 70 51 42 25 24 53 55 78 50 13 40 48 32 26 2 14 33 45 72 56 44 21 88 27 68 15 62 93 98 73 28 16 46 87 28 65 38 67 16 85 63 23 69 64 91 9 70 81 27 97 82 6 88 3 7 46 13 11 64 76 31 26 38 28 13 17 69 90 1 6 7 64 43 9 73 80 98 46 27 22 87 49 83 6 39 42 51 54 84 34 53 78 40 14 5'
+  const input3 = '89 30 25 32 72 70 51 42 25 24 53 55 78 50 13 40 48 32 26 2 14 33 45 72 56 44 21 88 27 68 15 62 93 98 73 28 16 46 87 28 65 38 67 16 85 63 23 69 64 91 9 70 81 27 97 82 6 88 3 7 46 13 11 64 76 31 26 38 28 13 17 69 90 1 6 7 64 43 9 73 80 98 46 27 22 87 49 83 6 39 42 51 54 84 34 53 78 40 14 5';
   
-  let array3 = input3.split(' ')
-  array3 = array3.map(item => parseInt(item))
+  let array3 = input3.split(' ');
+  array3 = array3.map(item => parseInt(item));
   let array2 = [];
   for (let i = 6000; i > 0; i--) {
     array2.push(i);
@@ -132,16 +144,36 @@ function main() {
   // console.log(bubbleSort(array2));
   // console.log(quickSort(array2));
 
-  const SLL = new linkedList()
-  SLL.insertFirst('Apollo')
-  SLL.insertLast('Boomer')
-  SLL.insertLast('Helo')
-  SLL.insertLast('Husker')
-  SLL.insertLast('Starbuck')
-  SLL.insertLast('Tauhida')
+  const SLL = new linkedList();
+  SLL.insertFirst('Apollo');
+  SLL.insertLast('Boomer');
+  SLL.insertLast('Tauhida');
+  SLL.insertLast('Helo');
+  SLL.insertLast('Husker');
+  SLL.insertLast('Starbuck');
+  //display(SLL);
 
-  display(SLL)
+  const SLL2 = new linkedList();
+  SLL2.insertFirst(1);
+  SLL2.insertLast(5);
+  SLL2.insertLast(3);
+  SLL2.insertLast(0);
+  SLL2.insertLast(4);
+  SLL2.insertLast(5);
+  
+  // console.log(SLL2.head);
 
+  let currentNode = SLL2.head;
+  let outArray = [];
+
+  while (currentNode.next !== null) {
+    outArray.push(currentNode.value);
+    currentNode = currentNode.next;
+  }
+
+  console.log(mergeSort(outArray));
+    
 }
+
 
 main();
