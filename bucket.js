@@ -131,55 +131,19 @@ function size(list) {
   }
 }
 
+// # 5 --------------------------------------------------------------
+// Bucket Sort 
 
-function main() {
-
-  const input1 = [3, 9, 1, 14, 17, 24, 22, 20];
-  const input2 = [21, 1, 26, 45, 29, 28, 2, 9, 16, 49, 39, 27, 43, 34, 46, 40];
-  const input3 = '89 30 25 32 72 70 51 42 25 24 53 55 78 50 13 40 48 32 26 2 14 33 45 72 56 44 21 88 27 68 15 62 93 98 73 28 16 46 87 28 65 38 67 16 85 63 23 69 64 91 9 70 81 27 97 82 6 88 3 7 46 13 11 64 76 31 26 38 28 13 17 69 90 1 6 7 64 43 9 73 80 98 46 27 22 87 49 83 6 39 42 51 54 84 34 53 78 40 14 5';
-  
-  let array3 = input3.split(' ');
-  array3 = array3.map(item => parseInt(item));
-  let array2 = [];
-
-  // sample array of i value from i - (i-i)
-  for (let i = 6000; i > 0; i--) {
-    array2.push(i);
+function bucketSort(array, min, max){
+  let buckets = Array(max - min + 1);
+  for (let i = 0; i < array.length; i++){
+    buckets[ array[i] - min ] = (buckets[ array[i] - min] | 0) + 1;
   }
-  // console.log(mergeSort(input1));
-  // console.log(bubbleSort(array2));
-  // console.log(quickSort(array2));
-
-  const SLL = new linkedList();
-  SLL.insertFirst('Apollo');
-  SLL.insertLast('Boomer');
-  SLL.insertLast('Tauhida');
-  SLL.insertLast('Helo');
-  SLL.insertLast('Husker');
-  SLL.insertLast('Starbuck');
-  //display(SLL);
-
-  const SLL2 = new linkedList();
-  SLL2.insertFirst(1);
-  SLL2.insertLast(5);
-  SLL2.insertLast(3);
-  SLL2.insertLast(0);
-  SLL2.insertLast(4);
-  SLL2.insertLast(5);
-  
-  // console.log(SLL2.head);
-
-  let currentNode = SLL2.head;
-  let outArray = [];
-
-  while (currentNode.next !== null) {
-    outArray.push(currentNode.value);
-    currentNode = currentNode.next;
+  let returnArray = [];
+  for (let i = min; i <= max; i++) {
+    for(let j = 0; j < buckets[i-min]; j++){
+      returnArray.push(i);
+    }
   }
-
-  console.log(mergeSort(outArray));
-    
+  return returnArray;
 }
-
-
-main();
